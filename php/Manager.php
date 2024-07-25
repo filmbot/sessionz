@@ -194,7 +194,7 @@ class Manager implements \SessionHandlerInterface {
      *
      * @return bool
      */
-    public function gc($max_lifetime): bool
+    public function gc($max_lifetime): int|false
     {
         if (is_null($this->handlers)) {
             $this->seedHandlerStack();

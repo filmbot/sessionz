@@ -190,11 +190,11 @@ class Manager implements \SessionHandlerInterface {
      * Clean up any potentially expired sessions (sessions with an age
      * greater than the specified maximum-allowed lifetime).
      *
-     * @param int $maxlifetime Max number of seconds for which a session is valid.
+     * @param int $max_lifetime Max number of seconds for which a session is valid.
      *
      * @return bool
      */
-    public function gc($maxlifetime): bool
+    public function gc($max_lifetime): bool
     {
         if (is_null($this->handlers)) {
             $this->seedHandlerStack();
@@ -203,7 +203,7 @@ class Manager implements \SessionHandlerInterface {
         /** @var callable $start */
         $start = $this->stacks['clean']->top();
         $this->handlerLock = true;
-        $data = $start($maxlifetime);
+        $data = $start($max_lifetime);
         $this->handlerLock = false;
         return $data;
     }
